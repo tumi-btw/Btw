@@ -1,0 +1,64 @@
+{
+ "items": [
+  {
+   "id": "sample-1",
+   "title": "Midnight Harbor",
+   "cat": "Drama",
+   "year": 2024,
+   "desc": "Sample poster. Delete it from the Admin tab after your first upload.",
+   "img": "images/sample-1.jpg",
+   "featured": true,
+   "added": 0
+  },
+  {
+   "id": "sample-2",
+   "title": "Paper Lanterns",
+   "cat": "Romance",
+   "year": 2023,
+   "desc": "Sample poster. Delete it from the Admin tab after your first upload.",
+   "img": "images/sample-2.jpg",
+   "featured": true,
+   "added": 1
+  },
+  {
+   "id": "sample-3",
+   "title": "Last Signal",
+   "cat": "Thriller",
+   "year": 2025,
+   "desc": "Sample poster. Delete it from the Admin tab after your first upload.",
+   "img": "images/sample-3.jpg",
+   "featured": true,
+   "added": 2
+  },
+  {
+   "id": "sample-4",
+   "title": "Dust Road",
+   "cat": "Drama",
+   "year": 2022,
+   "desc": "Sample poster. Delete it from the Admin tab after your first upload.",
+   "img": "images/sample-4.jpg",
+   "featured": false,
+   "added": 3
+  },
+  {
+   "id": "sample-5",
+   "title": "Neon Orchard",
+   "cat": "Thriller",
+   "year": 2024,
+   "desc": "Sample poster. Delete it from the Admin tab after your first upload.",
+   "img": "images/sample-5.jpg",
+   "featured": false,
+   "added": 4
+  },
+  {
+   "id": "sample-6",
+   "title": "Soft Static",
+   "cat": "Romance",
+   "year": 2025,
+   "desc": "Sample poster. Delete it from the Admin tab after your first upload.",
+   "img": "images/sample-6.jpg",
+   "featured": false,
+   "added": 5
+  }
+ ]
+}
