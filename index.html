@@ -70,8 +70,10 @@ const src=i=>prev[i.id]||encodeURI(i.img);
 function toast(m){const t=$('#toast');t.textContent=m;t.style.display='block';clearTimeout(t._t);t._t=setTimeout(()=>t.style.display='none',2600)}
 async function api(path,o={}){const c=gh(),r=await fetch(`https://api.github.com/repos/${c.owner}/${c.repo}/contents/${path}${o.q||''}`,{method:o.method||'GET',headers:{Authorization:'Bearer '+c.token,Accept:'application/vnd.github+json'},body:o.body&&JSON.stringify(o.body)});
  if(r.status===404&&!o.method)return null;if(!r.ok)throw new Error((await r.json().catch(()=>({}))).message||('Error '+r.status));return r.json()}
-async function load(){try{let d;if(admin()){const f=await api('data.json',{q:'?ref='+gh().branch});if(f)d=JSON.parse(dec(f.content))}
- if(!d)d=await (await fetch('data.json',{cache:'no-store'})).json();items=d.items||[]}catch(e){items=[];toast('Could not load content')}render()}
+async function load(){let d=null,err='';try{if(admin()){const f=await api('data.json',{q:'?ref='+gh().branch});if(f)d=JSON.parse(dec(f.content))}}catch(e){err=e.message}
+ if(!d){try{const r=await fetch('data.json?v='+Date.now(),{cache:'no-store'});if(!r.ok)throw new Error('HTTP '+r.status);d=await r.json()}catch(e){err=e.message}}
+ if(d){try{localStorage.setItem('cb-data',JSON.stringify(d))}catch(_){}}else{try{d=JSON.parse(localStorage.getItem('cb-data')||'null')}catch(_){}if(!d){d={items:[]};toast('Could not load content: '+err)}}
+ items=d.items||[];render()}
 async function saveData(fn,msg){for(let t=0;t<2;t++){const c=gh(),f=await api('data.json',{q:'?ref='+c.branch}),d=f?JSON.parse(dec(f.content)):{items:[]};
  d.items=fn(d.items||[]);try{await api('data.json',{method:'PUT',body:{message:msg,content:enc(JSON.stringify(d,null,1)),branch:c.branch,...(f?{sha:f.sha}:{})}});items=d.items;return}catch(e){if(t)throw e}}}
 function shrink(file,max=1280){return new Promise((ok,no)=>{const im=new Image();im.onload=()=>{const s=Math.min(1,max/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=Math.round(im.width*s);c.height=Math.round(im.height*s);c.getContext('2d').drawImage(im,0,0,c.width,c.height);ok(c.toDataURL('image/jpeg',.82))};im.onerror=()=>no(new Error('Not a valid image'));im.src=URL.createObjectURL(file)})}
