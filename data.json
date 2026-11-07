@@ -1,6 +1,16 @@
 {
  "items": [
   {
+   "id": "itachi-mw6qgzn7",
+   "title": "Itachi",
+   "cat": "General",
+   "year": "2026",
+   "desc": "",
+   "img": "images/itachi-mw6qgzn7.jpg",
+   "featured": false,
+   "added": 1794075908647
+  },
+  {
    "id": "anya-mw6psqzw",
    "title": "Anya",
    "cat": "Drama",
