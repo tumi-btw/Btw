@@ -1,6 +1,30 @@
 {
  "items": [
   {
+   "id": "hu-mw7fa947",
+   "title": "Hu",
+   "type": "movie",
+   "cat": "General",
+   "year": "2026",
+   "desc": "",
+   "img": "images/hu-mw7fa947.jpg",
+   "featured": false,
+   "added": 1794117590061,
+   "src": "https://t.me/c/4393435915/3",
+   "seasons": [
+    {
+     "n": 1,
+     "episodes": [
+      {
+       "n": 1,
+       "url": "1",
+       "lang": "Hindi english tamil nadu telugu"
+      }
+     ]
+    }
+   ]
+  },
+  {
    "id": "hh-mw7co4px",
    "title": "Hh",
    "cat": "Animation",
