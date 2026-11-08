@@ -94,6 +94,7 @@ nav button{position:relative;z-index:1;flex:1;display:grid;justify-items:center;
 .pk{position:fixed;inset:0;z-index:40}.pk[hidden]{display:none}.pkb{position:absolute;inset:0;width:100%;height:100%;background:rgba(0,0,0,.6)}
 .pkp{position:absolute;left:0;right:0;bottom:0;max-height:62vh;overflow:auto;background:#17142a;border-radius:22px 22px 0 0;padding:8px 14px calc(18px + env(safe-area-inset-bottom));animation:up .26s ease-out}
 .pkh{padding:14px 6px 8px;font-weight:700;font-size:16px}.po{display:flex;align-items:center;justify-content:space-between;width:100%;padding:15px 12px;border-radius:12px;font-weight:600}.po.on{color:var(--acc);background:rgba(232,176,74,.1)}.po i{font-style:normal}
+.lb{position:absolute;top:6px;right:6px;font-style:normal;font-size:10.5px;font-weight:700;border-radius:6px;padding:1px 6px;background:rgba(15,13,22,.78);color:var(--txt)}.hb{top:auto;bottom:6px;right:6px}
 </style>
 </head>
 <body>
@@ -107,7 +108,8 @@ let items=[],tab='home',cat='All',q='',prev={},timer,loading=true,demo=[],CFG={}
 const layers=[];const pushL=n=>{if(!layers.includes(n)){layers.push(n);history.pushState({l:n},'')}};
 const hideL=n=>{if(n==='sheet'){pstop();$('#sheet').hidden=true}else if(n==='dr')$('#dr').classList.remove('open');else if(n==='pk')$('#pk').hidden=true};
 const closeL=n=>{if(layers[layers.length-1]===n)history.back();else{const i=layers.indexOf(n);if(i>=0)layers.splice(i,1);hideL(n)}};
-const TY={movie:'Movie',series:'Series',anime:'Anime'},ty=i=>i.type||'movie',vurl=u=>/^https?:/.test(u)?u:(CFG.videoBase||'').replace(/\/?$/,'/')+u;
+const lg=i=>i.lang||((((i.seasons||[])[0]||{}).episodes||[])[0]||{}).lang||'';
+const TY={movie:'Movie',series:'Series',anime:'Anime'},ty=i=>i.type||'movie',vurl=u=>/^https?:/.test(u)||!CFG.videoBase?u:CFG.videoBase.replace(/\/?$/,'/')+u;
 const tgl=c=>{c=(c||'').trim();if(!c)return '';if(/^https?:\/\//.test(c))return c;if(/^t\.me\//.test(c))return 'https://'+c;return CFG.telegramBot?`https://t.me/${CFG.telegramBot.replace('@','')}?start=${encodeURIComponent(c)}`:''};
 const eps=it=>it.seasons?it.seasons.flatMap(se=>(se.episodes||[]).map(e=>({t:`S${se.n} E${e.n}${e.lang?' ['+e.lang+']':''}${e.title?' - '+e.title:''}`,u:e.url,tg:e.tg||it.tg,s:se.n,n:e.n,l:e.lang||''}))):(it.src?[{t:it.title,u:it.src,tg:it.tg}]:[]);
 const parseEps=t=>t.split('\n').map(l=>l.trim()).filter(Boolean).map(l=>{const p=l.split('|').map(z=>z.trim());return p.length===1?{url:p[0]}:{title:p[0],url:p[1],tg:p[2]||''}});
@@ -125,14 +127,14 @@ async function api(path,o={}){const c=gh(),r=await fetch(`https://api.github.com
 async function load(){let d=null,err='';try{if(admin()){const f=await api('data.json',{q:'?ref='+gh().branch});if(f)d=JSON.parse(dec(f.content))}}catch(e){err=e.message}
  if(!d){try{const r=await fetch('data.json?v='+Date.now(),{cache:'no-store'});if(!r.ok)throw new Error('HTTP '+r.status);d=await r.json()}catch(e){err=e.message}}
  if(d){try{localStorage.setItem('cb-data',JSON.stringify(d))}catch(_){}}else{try{d=JSON.parse(localStorage.getItem('cb-data')||'null')}catch(_){}if(!d){d={items:[]};toast('Could not load content: '+err)}}
- let dm=[];try{if(!localStorage.getItem('cb-nodemo')){const r=await fetch('demo.json');if(r.ok)dm=(await r.json()).items||[]}}catch(_){}
+ let dm=[],nd=false;try{nd=!!localStorage.getItem('cb-nodemo')}catch(_){}if(!nd)for(const fn of ['demo.json','test.json']){try{const r=await fetch(fn);if(r.ok)dm=dm.concat((await r.json()).items||[])}catch(_){}}
  try{const r=await fetch('config.json',{cache:'no-store'});if(r.ok)CFG=await r.json()}catch(_){}
  demo=dm;items=[...(d.items||[]),...demo];loading=false;render()}
 async function saveJson(path,fn,msg){for(let t=0;t<2;t++){const c=gh(),f=await api(path,{q:'?ref='+c.branch}),d=f?JSON.parse(dec(f.content)):null,nd=fn(d);try{await api(path,{method:'PUT',body:{message:msg,content:enc(JSON.stringify(nd,null,1)),branch:c.branch,...(f?{sha:f.sha}:{})}});return nd}catch(e){if(t)throw e}}}
 async function saveData(fn,msg){const nd=await saveJson('data.json',d=>({...(d||{}),items:fn((d||{}).items||[])}),msg);items=[...nd.items,...demo]}
 function shrink(file,max=1280){return new Promise((ok,no)=>{const im=new Image();im.onload=()=>{const s=Math.min(1,max/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=Math.round(im.width*s);c.height=Math.round(im.height*s);c.getContext('2d').drawImage(im,0,0,c.width,c.height);ok(c.toDataURL('image/jpeg',.82))};im.onerror=()=>no(new Error('Not a valid image'));im.src=URL.createObjectURL(file)})}
 const cats=()=>[...new Set(items.map(i=>i.cat).filter(Boolean))];
-const card=i=>`<button class="card" data-id="${esc(i.id)}"><span class="ph"><img loading="lazy" decoding="async" alt="" src="${esc(src(i))}">${isNew(i)?'<em class="nb">New</em>':''}${isFav(i.id)?'<em class="hb">&#9829;</em>':''}</span><span class="t">${esc(i.title)}</span><small>${TY[ty(i)]}${i.year?' '+esc(i.year):''}</small></button>`;
+const card=i=>`<button class="card" data-id="${esc(i.id)}"><span class="ph"><img loading="lazy" decoding="async" alt="" src="${esc(src(i))}">${isNew(i)?'<em class="nb">New</em>':''}${isFav(i.id)?'<em class="hb">&#9829;</em>':''}${lg(i)?`<em class="lb">${esc(lg(i))}</em>`:''}</span><span class="t">${esc(i.title)}</span><small>${TY[ty(i)]}${i.year?' '+esc(i.year):''}</small></button>`;
 function home(){
  if(loading)return `<div class="sk" style="height:208px;margin:4px 16px 16px;border-radius:22px"></div><div class="row">${'<div class="sk c0"></div>'.repeat(4)}</div>`;
  if(!items.length)return `<div class="empty" style="padding-top:120px"><h3 style="margin:0 0 6px">No content yet</h3>Open the Upload tab to add your first image.</div>`;
@@ -173,7 +175,7 @@ function openPick(kind){const i=items.find(x=>x.id===sel.id);if(!i)return;let o,
  $('#pkh').textContent=kind==='lang'?'Language':'Season';$('#pko').innerHTML=o.map(([v,t])=>`<button class="po ${v===a?'on':''}" data-pv="${esc(v)}" data-pkind="${kind}">${esc(t)}${v===a?'<i>&#10003;</i>':''}</button>`).join('');$('#pk').hidden=false;pushL('pk')}
 function openItem(id){const i=items.find(x=>x.id===id);if(!i)return;pstop();cur=null;const l0=langs(i)[0]??'';sel={id,s:seas(i,l0)[0]??1,l:l0,p:0};const s=$('#sheet'),f=isFav(id),L=eps(i),tl=tgl(i.tg),more=items.filter(x=>x.id!==id&&(ty(x)===ty(i)||x.cat===i.cat)).slice(0,12);
  s.innerHTML=`<div class="stage"><button class="close" aria-label="Back">&#8592;</button><div class="pv" id="pv"><div class="cover" style="background-image:url('${esc(src(i))}')">${L.length?`<button class="bigplay" data-play="${esc(id)}" data-k="0" aria-label="Play">${I.play}</button>`:'<span class="soon">Video coming soon</span>'}</div></div></div>
- <div class="wp"><h1>${esc(i.title)}</h1><div class="meta"><span>${TY[ty(i)]}</span>${i.year?`<span>${esc(i.year)}</span>`:''}<span>${esc(i.cat)}</span>${isNew(i)?'<span class="new">New</span>':''}</div><div class="now" id="nowt" hidden></div>
+ <div class="wp"><h1>${esc(i.title)}</h1><div class="meta"><span>${TY[ty(i)]}</span>${i.year?`<span>${esc(i.year)}</span>`:''}<span>${esc(i.cat)}</span>${i.lang?`<span>${esc(i.lang)}</span>`:''}${isNew(i)?'<span class="new">New</span>':''}</div><div class="now" id="nowt" hidden></div>
  <button class="ds" data-exp="1">${esc(i.desc||'')}</button>
  <div class="acts"><button class="pill sv ${f?'on':''}" data-fav="${esc(id)}">${I.heart}<span>${f?'Saved':'Save'}</span></button>${navigator.share?`<button class="pill" data-share="${esc(id)}">Share</button>`:''}<a class="pill" id="tgb" href="${esc(tl)}" target="_blank" rel="noopener" ${tl?'':'hidden'}>Telegram</a>${admin()&&!i.demo?`<button class="pill bad" data-del="${esc(id)}">Delete</button>`:''}</div>
  <div id="res">${i.seasons?res(i):''}</div>
@@ -224,7 +226,7 @@ document.addEventListener('click',async e=>{const t=e.target.closest('button,a')
    st.textContent='Compressing poster...';const url=await shrink(f),id=title.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,40)+'-'+Date.now().toString(36),path='images/'+id+'.jpg',c=gh();
    st.textContent='Uploading poster...';await api(path,{method:'PUT',body:{message:'Add image '+title,content:url.split(',')[1],branch:c.branch}});
    const it={id,title,type,cat:$('#u-c').value.trim()||'General',year:$('#u-y').value.trim(),desc:$('#u-d').value.trim(),img:path,featured:$('#u-ft').checked,added:Date.now()},v=$('#u-v').value.trim(),g=$('#u-g').value.trim();
-   if(v)it.src=v;if(g)it.tg=g;if(el.length)it.seasons=addEps({},el,sn,lang).seasons;
+   if(v)it.src=v;if(g)it.tg=g;if(lang&&!el.length)it.lang=lang;if(el.length)it.seasons=addEps({},el,sn,lang).seasons;
    st.textContent='Updating catalog...';await saveData(l=>[it,...l],'Add '+title);prev[id]=url;toast('Published');tab='home';render()}catch(x){st.textContent=x.message;toast('Upload failed')}t.disabled=false}
 });
 document.addEventListener('input',e=>{if(e.target.id==='q'){q=e.target.value;$('#res').innerHTML=resHtml()}});
