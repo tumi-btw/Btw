@@ -1,4 +1,4 @@
-const V='cb-v4',SHELL=['./','index.html','manifest.webmanifest','icon-192.png'];
+const V='cb-v5',SHELL=['./','index.html','manifest.webmanifest','icon-192.png'];
 const put=(r,q)=>{if(r.ok){const c=r.clone();caches.open(V).then(x=>x.put(q,c)).catch(()=>{})}return r};
 self.addEventListener('install',e=>{e.waitUntil(caches.open(V).then(c=>c.addAll(SHELL)).catch(()=>{}));self.skipWaiting()});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(x=>x!==V).map(x=>caches.delete(x)))));self.clients.claim()});

@@ -16,7 +16,7 @@ body{padding-bottom:calc(88px + env(safe-area-inset-bottom))}
 button,input,textarea{font:inherit;color:inherit}button{cursor:pointer;border:0;background:none;padding:0;text-align:left}
 :focus-visible{outline:2px solid var(--acc);outline-offset:2px}
 svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
-header{position:sticky;top:0;z-index:4;display:flex;align-items:center;justify-content:space-between;padding:calc(10px + env(safe-area-inset-top)) 14px 10px;background:rgba(15,13,22,.9);backdrop-filter:blur(14px);transition:transform .32s cubic-bezier(.3,.8,.3,1),box-shadow .3s}
+header{position:sticky;top:0;z-index:4;display:grid;grid-template-columns:40px 1fr 40px;align-items:center;row-gap:7px;padding:calc(10px + env(safe-area-inset-top)) 14px 10px;background:rgba(15,13,22,.9);backdrop-filter:blur(14px);transition:transform .32s cubic-bezier(.3,.8,.3,1),box-shadow .3s}
 header.scrolled{box-shadow:0 8px 24px rgba(0,0,0,.4)}header.hd-hide{transform:translateY(-100%)}
 .brand{display:flex;flex-direction:column;align-items:center;line-height:1.1}.brand small{color:var(--mut);font-size:11px;margin-top:3px}
 .logo{display:flex;align-items:center;gap:8px;font-size:21px;font-weight:800;letter-spacing:-.5px}.logo svg{width:28px;height:28px;stroke:none}.logo b{color:var(--acc)}
@@ -47,7 +47,7 @@ h3{margin:6px 16px 10px;font:700 18px/1.2 "Avenir Next","Segoe UI",system-ui,san
 .sbox input{flex:1;border:0;background:none;padding:13px 0;outline:0;min-width:0}
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px 10px;padding:8px 16px 0}.grid .card{width:auto}
 nav{position:fixed;left:14px;right:14px;bottom:calc(10px + env(safe-area-inset-bottom));display:flex;background:rgba(27,24,40,.94);backdrop-filter:blur(16px);border:1px solid var(--line);border-radius:22px;padding:6px;z-index:5}
-nav .ind{position:absolute;top:6px;bottom:6px;left:6px;width:calc((100% - 12px)/4);border-radius:16px;background:rgba(232,176,74,.15);transition:transform .38s cubic-bezier(.3,.8,.3,1)}
+nav .ind{position:absolute;top:6px;bottom:6px;left:6px;width:calc((100% - 12px)/3);border-radius:16px;background:rgba(232,176,74,.15);transition:transform .38s cubic-bezier(.3,.8,.3,1)}
 nav button{position:relative;z-index:1;flex:1;display:grid;justify-items:center;gap:2px;padding:7px 0;color:var(--mut);font-size:11px;font-weight:600;text-align:center;transition:color .25s}nav i{display:grid;font-style:normal}nav button svg{transition:transform .3s cubic-bezier(.3,.8,.3,1)}nav button.on{color:var(--acc)}nav button.on svg{transform:translateY(-1px) scale(1.12)}
 .sheet{position:fixed;inset:0;z-index:10;background:var(--bg);overflow:auto;animation:up .24s ease-out}
 @keyframes up{from{transform:translateY(24px);opacity:0}}@keyframes sh{to{background-position:-200% 0}}
@@ -95,9 +95,26 @@ nav button{position:relative;z-index:1;flex:1;display:grid;justify-items:center;
 .pkp{position:absolute;left:0;right:0;bottom:0;max-height:62vh;overflow:auto;background:#17142a;border-radius:22px 22px 0 0;padding:8px 14px calc(18px + env(safe-area-inset-bottom));animation:up .26s ease-out}
 .pkh{padding:14px 6px 8px;font-weight:700;font-size:16px}.po{display:flex;align-items:center;justify-content:space-between;width:100%;padding:15px 12px;border-radius:12px;font-weight:600}.po.on{color:var(--acc);background:rgba(232,176,74,.1)}.po i{font-style:normal}
 .lb{position:absolute;top:6px;right:6px;font-style:normal;font-size:10.5px;font-weight:700;border-radius:6px;padding:1px 6px;background:rgba(15,13,22,.78);color:var(--txt)}.hb{top:auto;bottom:6px;right:6px}
+.mk{stroke:none;fill:none;flex:none}.logo{justify-self:center;gap:9px}.logo .mk{width:30px;height:30px;filter:drop-shadow(0 3px 10px rgba(238,122,46,.45))}
+.wm{font-size:23px;font-weight:800;letter-spacing:-.6px;line-height:1}
+.wm b{background:linear-gradient(100deg,#ffd27a 20%,#ee7a2e 50%,#ffd27a 80%);background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:wm 4.5s linear infinite}
+@keyframes wm{to{background-position:-220% 0}}
+.shine{animation:shine 5.5s ease-in-out infinite}@keyframes shine{0%,55%{transform:translateX(0) skewX(-20deg)}100%{transform:translateX(110px) skewX(-20deg)}}
+.pl{transform-box:fill-box;transform-origin:center;animation:pulse 2.8s ease-in-out infinite}@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.13)}}
+.tg2{grid-column:1/-1;text-align:center;color:var(--mut);font-size:9.5px;font-weight:600;letter-spacing:.2em;white-space:nowrap}
+#splash{position:fixed;inset:0;z-index:100;background:radial-gradient(circle at 50% 42%,#2b2040 0,#0f0d16 64%);display:grid;place-items:center;transition:opacity .5s,transform .5s}#splash.out{opacity:0;transform:scale(1.06);pointer-events:none}
+.sp-in{display:flex;flex-direction:column;align-items:center;gap:16px}
+.mk.big{width:104px;height:104px;animation:pop .8s cubic-bezier(.2,1.3,.4,1) both;filter:drop-shadow(0 12px 34px rgba(238,122,46,.5))}@keyframes pop{from{transform:scale(.4) rotate(-20deg);opacity:0}}
+.wm.big{font-size:40px;display:flex}.wm.big span{display:inline-block;opacity:0;transform:translateY(16px);animation:rise .5s ease-out forwards;animation-delay:calc(.5s + var(--i)*.07s)}
+.wm.big b{background:none;animation:none}.wm.big b span{color:#f0b84f}@keyframes rise{to{opacity:1;transform:none}}
+#splash .tg2{opacity:0;animation:rise .6s ease-out 1.15s forwards;font-size:9px}
+.ecg{position:relative;display:flex;gap:8px;overflow-x:auto;scroll-snap-type:x proximity;scrollbar-width:none;margin:0 -16px;padding:2px 16px 6px}.ecg::-webkit-scrollbar{display:none}
+.ec{flex:none;scroll-snap-align:start;width:74px;height:48px}
+@media(prefers-reduced-motion:reduce){.shine,.pl,.wm b{animation:none}}
 </style>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffd27a"/><stop offset="1" stop-color="#ee7a2e"/></linearGradient><clipPath id="cp"><rect x="3" y="7" width="42" height="34" rx="11"/></clipPath></defs></svg>
 <header id="hd"></header>
 <main id="main"></main>
 <nav id="nv"></nav>
@@ -111,7 +128,8 @@ const closeL=n=>{if(layers[layers.length-1]===n)history.back();else{const i=laye
 const lg=i=>i.lang||((((i.seasons||[])[0]||{}).episodes||[])[0]||{}).lang||'';
 const TY={movie:'Movie',series:'Series',anime:'Anime'},ty=i=>i.type||'movie',vurl=u=>/^https?:/.test(u)||!CFG.videoBase?u:CFG.videoBase.replace(/\/?$/,'/')+u;
 const tgl=c=>{c=(c||'').trim();if(!c)return '';if(/^https?:\/\//.test(c))return c;if(/^t\.me\//.test(c))return 'https://'+c;return CFG.telegramBot?`https://t.me/${CFG.telegramBot.replace('@','')}?start=${encodeURIComponent(c)}`:''};
-const eps=it=>it.seasons?it.seasons.flatMap(se=>(se.episodes||[]).map(e=>({t:`S${se.n} E${e.n}${e.lang?' ['+e.lang+']':''}${e.title?' - '+e.title:''}`,u:e.url,tg:e.tg||it.tg,s:se.n,n:e.n,l:e.lang||''}))):(it.src?[{t:it.title,u:it.src,tg:it.tg}]:[]);
+const vers=it=>[{l:it.lang||'',u:it.src,tg:it.tg},...(it.alts||[]).map(x=>({l:x.lang||'',u:x.url,tg:x.tg}))].filter(v=>v.u);
+const eps=it=>it.seasons?it.seasons.flatMap(se=>(se.episodes||[]).map(e=>({t:`S${se.n} E${e.n}${e.lang?' ['+e.lang+']':''}${e.title?' - '+e.title:''}`,u:e.url,tg:e.tg||it.tg,s:se.n,n:e.n,l:e.lang||''}))):vers(it).map((v,_,a)=>({t:it.title+(v.l&&a.length>1?' ['+v.l+']':''),u:v.u,tg:v.tg||it.tg,l:v.l}));
 const parseEps=t=>t.split('\n').map(l=>l.trim()).filter(Boolean).map(l=>{const p=l.split('|').map(z=>z.trim());return p.length===1?{url:p[0]}:{title:p[0],url:p[1],tg:p[2]||''}});
 const addEps=(x,list,sn,lang='')=>{const seasons=JSON.parse(JSON.stringify(x.seasons||[]));let se=seasons.find(z=>z.n===sn);if(!se){se={n:sn,episodes:[]};seasons.push(se);seasons.sort((a,b)=>a.n-b.n)}list.forEach(e=>se.episodes.push({n:se.episodes.filter(z=>(z.lang||'')===lang).length+1,...e,...(lang?{lang}:{})}));return {...x,seasons}};
 const I={chev:'<svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>',play:'<svg viewBox="0 0 24 24" style="fill:currentColor;stroke:none"><path d="M8 5v14l11-7z"/></svg>',menu:'<svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h10"/></svg>',home:'<svg viewBox="0 0 24 24"><path d="M4 11l8-7 8 7v9a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1z"/></svg>',search:'<svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M16.5 16.5L21 21"/></svg>',grid:'<svg viewBox="0 0 24 24"><rect x="4" y="4" width="7" height="7" rx="2"/><rect x="13" y="4" width="7" height="7" rx="2"/><rect x="4" y="13" width="7" height="7" rx="2"/><rect x="13" y="13" width="7" height="7" rx="2"/></svg>',heart:'<svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.5A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg>',up:'<svg viewBox="0 0 24 24"><path d="M12 16V5m0 0L7 10m5-5l5 5M5 20h14"/></svg>'};
@@ -157,35 +175,37 @@ function adminView(){const c=gh(),m=location.hostname.endsWith('github.io');cons
  <datalist id="cl">${cats().map(c=>`<option value="${esc(c)}">`).join('')}</datalist><label>Year</label><input id="u-y" inputmode="numeric" value="${new Date().getFullYear()}"><label>Description</label><textarea id="u-d" rows="3"></textarea>
  <label>Video link (movie)</label><input id="u-v" autocapitalize="off" placeholder="https://...mp4 / .m3u8 / YouTube, or a path on your video host">
  <label>Episodes (series or anime): one per line as Title | Link | Telegram code</label><textarea id="u-e" rows="4" autocapitalize="off" placeholder="Episode 1 | https://.../e1.mp4"></textarea><label>Season number</label><input id="u-sn" inputmode="numeric" value="1"><label>Language (optional, e.g. Hindi dub)</label><input id="u-l" autocapitalize="off" list="ll"><datalist id="ll"><option value="Hindi"><option value="English"><option value="Japanese"><option value="Tamil"><option value="Telugu"></datalist>
- <label>Telegram link or code (optional)</label><input id="u-g" autocapitalize="off"><label><input type="checkbox" id="u-ft"> Show on the home banner</label><button class="btn" id="u-go">Publish</button><p class="hint" id="u-s">To add episodes to an existing series, use the same title, skip the poster and fill Episodes.</p></div>
+ <label>Telegram link or code (optional)</label><input id="u-g" autocapitalize="off"><label><input type="checkbox" id="u-ft"> Show on the home banner</label><button class="btn" id="u-go">Publish</button><p class="hint" id="u-s">To add episodes or another language to an existing title, use the same title, skip the poster and fill Episodes (for a movie: Video link plus Language).</p></div>
  <div class="panel"><h3>Streaming settings</h3><p class="hint">Change these when you move to a new video host. No code change needed.</p><label>Video host base URL (optional)</label><input id="c-v" autocapitalize="off" value="${esc(CFG.videoBase||'')}" placeholder="https://cdn.example.com/"><label>Telegram bot username</label><input id="c-b" autocapitalize="off" value="${esc(CFG.telegramBot||'')}" placeholder="MyFileStoreBot"><button class="btn" id="cfg-save">Save settings</button></div>`+conn}
 function render(){$('#main').innerHTML=tab==='home'?home():tab==='search'?explore():tab==='saved'?saved():adminView();
  document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('on',b.dataset.tab===tab));
- const ix=['home','search','saved','admin'].indexOf(tab),nd=$('#nv .ind');if(nd)nd.style.transform=`translateX(${ix*100}%)`;
+ const ix=['home','saved','admin'].indexOf(tab),nd=$('#nv .ind');if(nd){nd.style.opacity=ix<0?0:1;nd.style.transform=`translateX(${Math.max(ix,0)*100}%)`}
  clearInterval(timer);const h=$('#hero');if(!h)return;const d=[...document.querySelectorAll('.dots i')],n=h.children.length,w=()=>h.firstElementChild.offsetWidth+12,k=()=>Math.round(h.scrollLeft/w());
  h.onscroll=()=>d.forEach((x,i)=>x.classList.toggle('on',i===k()));
  if(n>1&&!matchMedia('(prefers-reduced-motion:reduce)').matches){timer=setInterval(()=>h.scrollTo({left:((k()+1)%n)*w(),behavior:'smooth'}),4800);h.addEventListener('touchstart',()=>clearInterval(timer),{passive:true})}}
 const LN=l=>l||'Original',PS=40,langs=i=>[...new Set(eps(i).map(e=>e.l))],seas=(i,l)=>[...new Set(eps(i).filter(e=>e.l===l).map(e=>e.s))].sort((a,b)=>a-b);
+const firstK=it=>{const g=eps(it).map((e,i)=>({...e,i})).filter(e=>e.l===sel.l&&(!it.seasons||e.s===sel.s)).sort((a,b)=>(a.n||0)-(b.n||0));return g.length?g[0].i:0};
+const ctr=()=>{const r=$('.ecg'),a=r&&r.querySelector('.ec.on');if(r&&a)r.scrollTo({left:a.offsetLeft-(r.clientWidth-a.offsetWidth)/2,behavior:'smooth'})};
 const nextK=(L,k)=>{const e=L[k],c=L.map((x,i)=>({...x,i})).filter(x=>x.l===e.l&&(x.s>e.s||(x.s===e.s&&x.n>e.n))).sort((a,b)=>a.s-b.s||a.n-b.n)[0];return c?c.i:-1};
-function res(i){const L=eps(i).map((e,k)=>({...e,k})),lg=langs(i),g=L.filter(e=>e.s===sel.s&&e.l===sel.l).sort((a,b)=>a.n-b.n),np=Math.ceil(g.length/PS),pg=Math.min(sel.p||0,Math.max(0,np-1)),seen=u=>{try{return localStorage.getItem('cb-seen:'+u)}catch(_){return null}};
+function res(i){if(!i.seasons){const lg=langs(i);return lg.length&&(lg.length>1||lg[0])?`<h3 class="h2">Language</h3><div class="dds"><button class="dd" data-pk="lang">${esc(LN(sel.l))}${I.chev}</button></div>`:''}const L=eps(i).map((e,k)=>({...e,k})),lg=langs(i),g=L.filter(e=>e.s===sel.s&&e.l===sel.l).sort((a,b)=>a.n-b.n),np=Math.ceil(g.length/PS),pg=Math.min(sel.p||0,Math.max(0,np-1)),seen=u=>{try{return localStorage.getItem('cb-seen:'+u)}catch(_){return null}};
  return `<h3 class="h2">Episodes <span class="hint">${g.length} available</span></h3><div class="dds">${lg.length>1||lg[0]?`<button class="dd" data-pk="lang">${esc(LN(sel.l))}${I.chev}</button>`:''}<button class="dd" data-pk="season">Season ${String(sel.s).padStart(2,'0')}${I.chev}</button></div>`
  +(np>1?`<div class="rg">${Array.from({length:np},(_,p)=>`<button class="rc ${p===pg?'on':''}" data-pg="${p}">${p*PS+1}-${Math.min(g.length,p*PS+PS)}</button>`).join('')}</div>`:'')
  +`<div class="ecg">${g.slice(pg*PS,pg*PS+PS).map(e=>`<button class="ec ${cur&&cur.id===i.id&&cur.k===e.k?'on':''} ${seen(vurl(e.u))?'seen':''}" data-play="${esc(i.id)}" data-k="${e.k}">${String(e.n).padStart(2,'0')}</button>`).join('')||'<span class="hint">No episodes yet</span>'}</div>`}
 function openPick(kind){const i=items.find(x=>x.id===sel.id);if(!i)return;let o,a;if(kind==='lang'){o=langs(i).map(l=>[l,LN(l)]);a=sel.l}else{o=seas(i,sel.l).map(n=>[n,'Season '+String(n).padStart(2,'0')]);a=sel.s}
  $('#pkh').textContent=kind==='lang'?'Language':'Season';$('#pko').innerHTML=o.map(([v,t])=>`<button class="po ${v===a?'on':''}" data-pv="${esc(v)}" data-pkind="${kind}">${esc(t)}${v===a?'<i>&#10003;</i>':''}</button>`).join('');$('#pk').hidden=false;pushL('pk')}
 function openItem(id){const i=items.find(x=>x.id===id);if(!i)return;pstop();cur=null;const l0=langs(i)[0]??'';sel={id,s:seas(i,l0)[0]??1,l:l0,p:0};const s=$('#sheet'),f=isFav(id),L=eps(i),tl=tgl(i.tg),more=items.filter(x=>x.id!==id&&(ty(x)===ty(i)||x.cat===i.cat)).slice(0,12);
- s.innerHTML=`<div class="stage"><button class="close" aria-label="Back">&#8592;</button><div class="pv" id="pv"><div class="cover" style="background-image:url('${esc(src(i))}')">${L.length?`<button class="bigplay" data-play="${esc(id)}" data-k="0" aria-label="Play">${I.play}</button>`:'<span class="soon">Video coming soon</span>'}</div></div></div>
+ s.innerHTML=`<div class="stage"><button class="close" aria-label="Back">&#8592;</button><div class="pv" id="pv"><div class="cover" style="background-image:url('${esc(src(i))}')">${L.length?`<button class="bigplay" data-play="${esc(id)}" data-k="-1" aria-label="Play">${I.play}</button>`:'<span class="soon">Video coming soon</span>'}</div></div></div>
  <div class="wp"><h1>${esc(i.title)}</h1><div class="meta"><span>${TY[ty(i)]}</span>${i.year?`<span>${esc(i.year)}</span>`:''}<span>${esc(i.cat)}</span>${i.lang?`<span>${esc(i.lang)}</span>`:''}${isNew(i)?'<span class="new">New</span>':''}</div><div class="now" id="nowt" hidden></div>
  <button class="ds" data-exp="1">${esc(i.desc||'')}</button>
  <div class="acts"><button class="pill sv ${f?'on':''}" data-fav="${esc(id)}">${I.heart}<span>${f?'Saved':'Save'}</span></button>${navigator.share?`<button class="pill" data-share="${esc(id)}">Share</button>`:''}<a class="pill" id="tgb" href="${esc(tl)}" target="_blank" rel="noopener" ${tl?'':'hidden'}>Telegram</a>${admin()&&!i.demo?`<button class="pill bad" data-del="${esc(id)}">Delete</button>`:''}</div>
- <div id="res">${i.seasons?res(i):''}</div>
+ <div id="res">${res(i)}</div>
  <div class="tabs"><span>More like this</span></div>${more.length?`<div class="grid">${more.map(card).join('')}</div>`:''}</div>`;
  if(s.hidden){s.hidden=false;pushL('sheet')}s.scrollTop=0}
 let hlsP;const loadHls=()=>hlsP||(hlsP=new Promise((ok,no)=>{const e=document.createElement('script');e.src='https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.5.13/hls.min.js';e.onload=ok;e.onerror=no;document.head.appendChild(e)}));
 function pstop(){const pv=$('#pv'),v=pv&&pv.querySelector('video');if(v){v.pause();v._h&&v._h.destroy();v.removeAttribute('src');v.load()}}
-async function play(id,k){const it=items.find(x=>x.id===id),pv=$('#pv');if(!it||!pv)return;const L=eps(it);if(!L.length)return toast('No video added yet');k=Math.max(0,Math.min(k||0,L.length-1));pstop();cur={id,k};
+async function play(id,k){const it=items.find(x=>x.id===id),pv=$('#pv');if(!it||!pv)return;const L=eps(it);if(!L.length)return toast('No video added yet');if(k===-1)k=firstK(it);k=Math.max(0,Math.min(k||0,L.length-1));pstop();cur={id,k};
  const e=L[k],u=vurl(e.u),yt=u.match(/(?:youtu\.be\/|[?&]v=|embed\/|shorts\/)([\w-]{11})/),tg=tgl(e.tg),nt=$('#nowt'),tb=$('#tgb');nt.hidden=!it.seasons;nt.textContent=e.t;if(tb){tb.hidden=!tg;if(tg)tb.href=tg}
- if(it.seasons){const g=eps(it).filter(x=>x.s===e.s&&x.l===e.l).sort((a,b)=>a.n-b.n);sel={id,s:e.s,l:e.l,p:Math.max(0,Math.floor(g.findIndex(x=>x.n===e.n)/PS))};$('#res').innerHTML=res(it)}
+ if(it.seasons){const g=eps(it).filter(x=>x.s===e.s&&x.l===e.l).sort((a,b)=>a.n-b.n);sel={id,s:e.s,l:e.l,p:Math.max(0,Math.floor(g.findIndex(x=>x.n===e.n)/PS))};$('#res').innerHTML=res(it);ctr()}
  if(yt){pv.innerHTML=`<iframe src="https://www.youtube-nocookie.com/embed/${yt[1]}?autoplay=1&rel=0" allow="autoplay;fullscreen;picture-in-picture" allowfullscreen></iframe>`;return}
  pv.innerHTML='';const v=document.createElement('video');v.controls=true;v.playsInline=true;v.autoplay=true;v.preload='metadata';pv.appendChild(v);
  if(/\.m3u8(\?|$)/.test(u)&&!v.canPlayType('application/vnd.apple.mpegurl')){try{await loadHls();if(window.Hls&&Hls.isSupported()){const h=new Hls();h.loadSource(u);h.attachMedia(v);v._h=h}else toast('This browser cannot play the stream')}catch(_){toast('Player could not load')}}else v.src=u;
@@ -194,7 +214,7 @@ async function play(id,k){const it=items.find(x=>x.id===id),pv=$('#pv');if(!it||
  v.addEventListener('timeupdate',()=>{if(Date.now()-lt>5000){lt=Date.now();try{localStorage.setItem(key,v.currentTime|0)}catch(_){}}});
  v.addEventListener('ended',()=>{try{localStorage.removeItem(key);localStorage.setItem('cb-seen:'+u,'1')}catch(_){}const nx=nextK(L,k);if(nx>=0)play(id,nx)});
  v.addEventListener('error',()=>toast('Video failed to load'))}
-function drawer(){const cs=cats();$('#pn').innerHTML=`<div class="logo" style="padding:4px 12px 14px">${mark}<span>Cine<b>Box</b></span></div>${[['home','Home','home'],['search','Explore','grid'],['saved','Saved','heart'],['admin','Upload','up']].map(([k,l,ic])=>`<button class="mi ${tab===k?'on':''}" data-tab="${k}">${I[ic]}${l}</button>`).join('')}${cs.length?`<div class="ml">Categories</div>${cs.map(c=>`<button class="mi" data-cat="${esc(c)}"><span style="width:22px;text-align:center;color:var(--acc)">&#9679;</span>${esc(c)}<small>${items.filter(i=>i.cat===c).length}</small></button>`).join('')}`:''}`}
+function drawer(){$('#pn').innerHTML=`<div class="logo" style="justify-content:flex-start;padding:4px 12px 6px">${mark}<span class="wm">Cine<b>Box</b></span></div><div class="tg2" style="text-align:left;padding:0 12px 16px;font-size:8px">${TAG}</div>${[['home','Home','home'],['saved','Saved','heart'],['admin','Upload','up']].map(([k,l,ic])=>`<button class="mi ${tab===k?'on':''}" data-tab="${k}">${I[ic]}${l}</button>`).join('')}`}
 const openDr=()=>{drawer();$('#dr').classList.add('open');pushL('dr')},closeDr=()=>closeL('dr');
 const anim=()=>{const m=$('#main');m.classList.remove('fi');void m.offsetWidth;m.classList.add('fi');scrollTo(0,0)};
 const closeSheet=()=>closeL('sheet');
@@ -211,7 +231,7 @@ document.addEventListener('click',async e=>{const t=e.target.closest('button,a')
  if(t.dataset.exp){t.classList.toggle('open');return}
  if(t.dataset.pk){openPick(t.dataset.pk);return}
  if(t.dataset.pkc){closeL('pk');return}
- if(t.dataset.pv!==undefined){const i=items.find(x=>x.id===sel.id),pv=t.dataset.pv;if(t.dataset.pkind==='lang'){sel.l=pv;const ss=seas(i,pv);if(!ss.includes(sel.s))sel.s=ss[0]}else sel.s=+pv;sel.p=0;$('#res').innerHTML=res(i);closeL('pk');return}
+ if(t.dataset.pv!==undefined){const i=items.find(x=>x.id===sel.id),pv=t.dataset.pv;if(t.dataset.pkind==='lang'){sel.l=pv;const ss=seas(i,pv);if(!ss.includes(sel.s))sel.s=ss[0]}else sel.s=+pv;sel.p=0;$('#res').innerHTML=res(i);ctr();closeL('pk');if(!i.seasons&&cur&&cur.id===i.id)play(i.id,-1);return}
  if(t.dataset.pg!==undefined){sel.p=+t.dataset.pg;$('#res').innerHTML=res(items.find(x=>x.id===sel.id));return}
  if(t.dataset.id)return openItem(t.dataset.id);
  if(t.dataset.del){if(!confirm('Delete this item permanently?'))return;const i=items.find(x=>x.id===t.dataset.del);t.disabled=true;
@@ -219,10 +239,10 @@ document.addEventListener('click',async e=>{const t=e.target.closest('button,a')
  if(t.id==='g-save'){localStorage.setItem('gh',JSON.stringify({owner:$('#g-o').value.trim(),repo:$('#g-r').value.trim(),branch:$('#g-b').value.trim()||'main',token:$('#g-t').value.trim()}));toast('Connection saved');load()}
  if(t.id==='g-out'){localStorage.removeItem('gh');toast('Disconnected');load()}
  if(t.id==='cfg-save'){try{const c={telegramBot:$('#c-b').value.trim().replace('@',''),videoBase:$('#c-v').value.trim()};CFG=await saveJson('config.json',()=>c,'Update streaming settings');toast('Settings saved')}catch(x){toast(x.message)}return}
- if(t.id==='u-go'){const f=$('#u-f').files[0],title=$('#u-t').value.trim(),st=$('#u-s'),type=$('#u-ty').value,el=parseEps($('#u-e').value),sn=parseInt($('#u-sn').value)||1,lang=$('#u-l').value.trim(),ex=items.find(x=>!x.demo&&x.title.toLowerCase()===title.toLowerCase());
-  if(!title||(!f&&!(ex&&el.length)))return toast('Add a title and poster, or reuse a series title with episodes');
+ if(t.id==='u-go'){const f=$('#u-f').files[0],title=$('#u-t').value.trim(),st=$('#u-s'),type=$('#u-ty').value,el=parseEps($('#u-e').value),sn=parseInt($('#u-sn').value)||1,lang=$('#u-l').value.trim(),vl=$('#u-v').value.trim(),ex=items.find(x=>!x.demo&&x.title.toLowerCase()===title.toLowerCase());
+  if(!title||(!f&&!(ex&&(el.length||vl))))return toast('Add a title and poster, or reuse a series title with episodes');
   t.disabled=true;try{
-   if(!f){st.textContent='Adding episodes...';await saveData(l=>l.map(x=>x.id===ex.id?addEps(x,el,sn,lang):x),'Add episodes to '+title);toast('Episodes added');render();t.disabled=false;return}
+   if(!f){st.textContent='Adding episodes...';await saveData(l=>l.map(x=>x.id!==ex.id?x:(el.length?addEps(x,el,sn,lang):{...x,alts:[...(x.alts||[]),{lang,url:vl,tg:$('#u-g').value.trim()}]})),'Add episodes to '+title);toast('Episodes added');render();t.disabled=false;return}
    st.textContent='Compressing poster...';const url=await shrink(f),id=title.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,40)+'-'+Date.now().toString(36),path='images/'+id+'.jpg',c=gh();
    st.textContent='Uploading poster...';await api(path,{method:'PUT',body:{message:'Add image '+title,content:url.split(',')[1],branch:c.branch}});
    const it={id,title,type,cat:$('#u-c').value.trim()||'General',year:$('#u-y').value.trim(),desc:$('#u-d').value.trim(),img:path,featured:$('#u-ft').checked,added:Date.now()},v=$('#u-v').value.trim(),g=$('#u-g').value.trim();
@@ -231,12 +251,14 @@ document.addEventListener('click',async e=>{const t=e.target.closest('button,a')
 });
 document.addEventListener('input',e=>{if(e.target.id==='q'){q=e.target.value;$('#res').innerHTML=resHtml()}});
 if('serviceWorker'in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
-const mark='<svg viewBox="0 0 24 24" style="fill:#e8b04a;stroke:none"><rect x="2" y="4" width="20" height="16" rx="5"/><path d="M10 9l5.2 3-5.2 3z" fill="#0f0d16"/></svg>';
-$('#hd').innerHTML=`<button class="ico" id="mn" aria-label="Menu">${I.menu}</button><div class="brand"><div class="logo">${mark}<span>Cine<b>Box</b></span></div><small>Original stories, one tap away</small></div><button class="ico" data-tab="search" data-focus="1" aria-label="Search">${I.search}</button>`;
-$('#nv').innerHTML='<span class="ind"></span>'+[['home','Home','home'],['search','Explore','grid'],['saved','Saved','heart'],['admin','Upload','up']].map(([k,l,ic])=>`<button data-tab="${k}"><i>${I[ic]}</i>${l}</button>`).join('');
+const mk=c=>`<svg class="mk ${c||''}" viewBox="0 0 48 48"><rect x="3" y="7" width="42" height="34" rx="11" fill="url(#lg)"/><g fill="#0f0d16" opacity=".28"><circle cx="9" cy="15" r="1.6"/><circle cx="9" cy="24" r="1.6"/><circle cx="9" cy="33" r="1.6"/><circle cx="39" cy="15" r="1.6"/><circle cx="39" cy="24" r="1.6"/><circle cx="39" cy="33" r="1.6"/></g><g clip-path="url(#cp)"><rect class="shine" x="-24" y="0" width="14" height="48" fill="#fff" opacity=".42"/></g><path class="pl" d="M20 17l12 7-12 7z" fill="#0f0d16"/></svg>`;
+const mark=mk(),TAG='MOVIES &bull; SERIES &bull; ANIME &bull; ANYTIME ANYWHERE';
+$('#hd').innerHTML=`<button class="ico" id="mn" aria-label="Menu">${I.menu}</button><div class="logo">${mark}<span class="wm">Cine<b>Box</b></span></div><button class="ico" data-tab="search" data-focus="1" aria-label="Search">${I.search}</button><div class="tg2">${TAG}</div>`;
+$('#nv').innerHTML='<span class="ind"></span>'+[['home','Home','home'],['saved','Saved','heart'],['admin','Upload','up']].map(([k,l,ic])=>`<button data-tab="${k}"><i>${I[ic]}</i>${l}</button>`).join('');
 let ly=0;addEventListener('scroll',()=>{const y=scrollY,h=$('#hd');h.classList.toggle('scrolled',y>8);h.classList.toggle('hd-hide',y>ly&&y>90);ly=y},{passive:true});
 history.replaceState({s:0},'');history.pushState({s:1},'');
 addEventListener('popstate',()=>{if(layers.length){hideL(layers.pop());return}if(tab!=='home'){tab='home';render();anim();history.pushState({s:1},'');return}history.back()});
+(()=>{let seen=false;try{seen=sessionStorage.getItem('cb-sp')}catch(_){}if(seen||matchMedia('(prefers-reduced-motion:reduce)').matches)return;try{sessionStorage.setItem('cb-sp','1')}catch(_){}const sp=document.createElement('div');sp.id='splash';sp.innerHTML=`<div class="sp-in">${mk('big')}<div class="wm big">${[...'Cine'].map((c,i)=>`<span style="--i:${i}">${c}</span>`).join('')}<b>${[...'Box'].map((c,i)=>`<span style="--i:${i+4}">${c}</span>`).join('')}</b></div><div class="tg2">${TAG}</div></div>`;document.body.appendChild(sp);setTimeout(()=>sp.classList.add('out'),1900);setTimeout(()=>sp.remove(),2450)})();
 render();load();
 </script>
 </body>
