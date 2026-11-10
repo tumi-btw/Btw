@@ -1,6 +1,45 @@
 {
  "items": [
   {
+   "id": "naruto-shippuden",
+   "desc": "",
+   "featured": false,
+   "added": 1794290370818,
+   "title": "Naruto Shippuden",
+   "type": "anime",
+   "cat": "Drama Action Comedy",
+   "img": "images/naruto-shippuden.jpg",
+   "seasons": [
+    {
+     "n": 18,
+     "episodes": [
+      {
+       "n": 4,
+       "url": "",
+       "lang": "Hindi",
+       "tg": "https://t.me/c/4451220897/8"
+      },
+      {
+       "n": 5,
+       "url": "",
+       "lang": "Hindi",
+       "tg": "https://t.me/c/4451220897/11"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "caption-harbor-lights",
+   "desc": "",
+   "featured": false,
+   "added": 1794290367579,
+   "title": "caption: Harbor Lights",
+   "type": "series",
+   "cat": "Drama",
+   "img": "images/caption-harbor-lights.jpg"
+  },
+  {
    "id": "itachi-mw6qgzn7",
    "title": "Itachi",
    "cat": "General",
