@@ -1,6 +1,95 @@
 {
  "items": [
   {
+   "id": "classroom-of-the-elite",
+   "desc": "",
+   "featured": false,
+   "added": 1794386926636,
+   "title": "Classroom Of The Elite",
+   "type": "anime",
+   "cat": "Action",
+   "img": "images/classroom-of-the-elite.jpg",
+   "seasons": [
+    {
+     "n": 1,
+     "episodes": [
+      {
+       "n": 1,
+       "url": "",
+       "lang": "Hindi",
+       "tg": "https://t.me/c/4451220897/20"
+      },
+      {
+       "n": 2,
+       "url": "",
+       "lang": "Hindi",
+       "tg": "https://t.me/c/4451220897/21"
+      },
+      {
+       "n": 3,
+       "url": "",
+       "lang": "Hindi",
+       "tg": "https://t.me/c/4451220897/22"
+      },
+      {
+       "n": 4,
+       "url": "",
+       "lang": "Hindi",
+       "tg": "https://t.me/c/4451220897/23"
+      },
+      {
+       "n": 5,
+       "url": "",
+       "lang": "Hindi",
+       "tg": "https://t.me/c/4451220897/24"
+      },
+      {
+       "n": 6,
+       "url": "",
+       "lang": "Hindi",
+       "tg": "https://t.me/c/4451220897/25"
+      },
+      {
+       "n": 7,
+       "url": "",
+       "lang": "Hindi",
+       "tg": "https://t.me/c/4451220897/26"
+      },
+      {
+       "n": 8,
+       "url": "",
+       "lang": "Hindi",
+       "tg": "https://t.me/c/4451220897/27"
+      },
+      {
+       "n": 9,
+       "url": "",
+       "lang": "Hindi",
+       "tg": "https://t.me/c/4451220897/28"
+      },
+      {
+       "n": 10,
+       "url": "",
+       "lang": "Hindi",
+       "tg": "https://t.me/c/4451220897/29"
+      },
+      {
+       "n": 11,
+       "url": "",
+       "lang": "Hindi",
+       "tg": "https://t.me/c/4451220897/30"
+      },
+      {
+       "n": 12,
+       "url": "",
+       "lang": "Hindi",
+       "tg": "https://t.me/c/4451220897/31"
+      }
+     ]
+    }
+   ]
+  },
+  {
    "id": "naruto-shippuden",
    "desc": "",
    "featured": false,
@@ -17,17 +106,18 @@
        "n": 4,
        "url": "",
        "lang": "Hindi",
-       "tg": "https://t.me/c/4451220897/8"
+       "tg": "https://t.me/c/4451220897/15"
       },
       {
        "n": 5,
        "url": "",
        "lang": "Hindi",
-       "tg": "https://t.me/c/4451220897/11"
+       "tg": "https://t.me/c/4451220897/18"
       }
      ]
     }
-   ]
+   ],
+   "upd": 1794386923593
   },
   {
    "id": "caption-harbor-lights",
